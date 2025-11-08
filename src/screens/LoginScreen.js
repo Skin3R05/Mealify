@@ -34,9 +34,20 @@ const LoginScreen = () => {
         />
         <Button
             title = "Login"
-            onPress = {() => console.log("Login button clicked")}
+            onPress = {() => {
+                if (!email || !password) {
+                    alert('Please fill in all fields');
+                }
+                else if (!/\S+@\S+\.\S+/.test(email)) {
+                    alert('Please enter a valid email address');
+                } 
+                else {
+                    console.log('Login successful');
+                    // Later: connect to backend API
+                }
+            }}
         />
-        <TouchableOpacity style = {styles.link} onPress = {() => {console.log("link clicked")}}>
+        <TouchableOpacity style = {styles.link} onPress = {() => {navigation.navigate("SignUpScreen")}}>
             <Text style = {styles.link1}>
                 Don't have an account? 
             </Text>
