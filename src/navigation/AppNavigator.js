@@ -7,6 +7,12 @@ import WelcomeScreen from '../screens/WelcomeScreen.js';
 import LoginScreen from '../screens/LoginScreen.js';
 import SignUpScreen from '../screens/SignUpScreen.js';
 
+
+
+// ===========================
+// Main code
+// ===========================
+
 const Stack = createStackNavigator();
 
 export default function AppNavigator() {
@@ -14,7 +20,7 @@ export default function AppNavigator() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-        
+        <Stack.Screen name="LoginScreen" component={LoginScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

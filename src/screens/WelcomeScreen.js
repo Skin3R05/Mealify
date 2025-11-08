@@ -1,8 +1,17 @@
 import { View, Text, StatusBar, Image, StyleSheet } from 'react-native'
 import Button from '../components/Button.js'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native';
 
-const WelcomeScreen = ({ navigation }) => {
+
+
+// ===========================
+// Main code
+// ===========================
+
+const WelcomeScreen = () => {
+  const navigation = useNavigation();
+
   return (
     <View style = {styles.container}>
       <StatusBar barStyle = {"dark-content"} />
@@ -11,11 +20,17 @@ const WelcomeScreen = ({ navigation }) => {
       <Text style = {styles.tagline}>Freash meals, fast delivery</Text>
       <Button
         title = "Get Started"
-        onPress = { () => navigation.navigate('Login') }
+        onPress = { () => navigation.navigate('LoginScreen') }
       />
     </View>
   )
 };
+
+
+
+// ===========================
+// Styles
+// ===========================
 
 const styles = StyleSheet.create({
     container: {
