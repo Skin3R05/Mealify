@@ -24,9 +24,9 @@ export default function AppNavigator() {
           headerShown: false,
           gestureEnabled: true,
           gestureDirection: 'horizontal',
-          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS, // 💫 smooth slide
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           transitionSpec: {
-            open: { animation: 'timing', config: { duration: 400 } }, // adjust speed
+            open: { animation: 'timing', config: { duration: 400 } },
             close: { animation: 'timing', config: { duration: 350 } },
           },
         }}

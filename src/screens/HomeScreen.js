@@ -1,15 +1,45 @@
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  Image,
+  TextInput,
+  SafeAreaView,
+} from 'react-native'
 import SearchBar from '../components/SearchBar.js';
-import React from 'react'
+import { Ionicons } from '@expo/vector-icons';
+import CategoryCard from '../components/CategoryCard.js';
+import React, { useState, useMemo } from 'react'
+import { FlatList } from 'react-native-gesture-handler';
 
 
 // ===========================
 // Main code
 // ===========================
 
+const CATEGORIES = [
+  { id: '1', label: 'Pizza', icon: 'pizza', bg: '#FFF6F6', textColor: '#B1392A', iconColor: '#B1392A', activeBg: '#B1392A', activeText: '#fff', activeIconColor: '#fff' },
+  { id: '2', label: 'Burgers', icon: 'fast-food', bg: '#FFF8E6', textColor: '#B36B00', iconColor: '#B36B00', activeBg: '#B36B00', activeText: '#fff', activeIconColor: '#fff' },
+  { id: '3', label: 'Vegan', icon: 'leaf', bg: '#EFFCF1', textColor: '#1A7A3A', iconColor: '#1A7A3A', activeBg: '#1A7A3A', activeText: '#fff', activeIconColor: '#fff' },
+  { id: '4', label: 'Desserts', icon: 'ice-cream', bg: '#F8F0FF', textColor: '#8A41B3', iconColor: '#8A41B3', activeBg: '#8A41B3', activeText: '#fff', activeIconColor: '#fff' },
+  { id: '5', label: 'Sushi', icon: 'fish', bg: '#EEF8FF', textColor: '#006B9C', iconColor: '#006B9C', activeBg: '#006B9C', activeText: '#fff', activeIconColor: '#fff' },
+];
+
 const HomeScreen = () => {
+  const [activeCategory, setActiveCategory] = useState ('1');
+
+  const onSelectCategory = (id) => {
+    setActiveCategory(id);
+    // TODO: filter restaurants based on selected category
+  }
+
+  const renderCategory = ({ item }) => (
+    <CategoryCard item = {item} active = {item.id === activeCategory} onPress = {onSelectCategory} />
+  )
+
   return (
     <View style = {styles.container}>
+  
       <View style = {styles.header}>
         <View>
           <Text style = {styles.greeting}>Hi, Saba  👋</Text>
@@ -18,6 +48,20 @@ const HomeScreen = () => {
         <Image source={require('../assets/images/avatar.jpg')} style = {styles.avatar}></Image>        
       </View>
       <SearchBar placeholder = {'Search'} />
+
+      <View style = {styles.categories}>
+        <Text style = {styles.categoriesTitle}>Categories</Text>
+      </View>
+      <FlatList
+        data = {CATEGORIES}
+        keyExtractor={(item) => item.id}
+        renderItem = {renderCategory}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.categoriesList}
+        snapToAlignment="start"
+        decelerationRate="fast"
+      />
     </View>
   )
 };
@@ -35,13 +79,15 @@ const styles = StyleSheet.create({
         paddingHorizontal: 25,
         paddingTop: 80,
     },
+
+    // Header section
     header: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       marginBottom: 15,
     },
     greeting: {
-        fontSize: 30,
+        fontSize: 34,
         fontWeight: '600',
         color: '#1A482F',
     },
@@ -56,6 +102,19 @@ const styles = StyleSheet.create({
       borderRadius: 30,
       borderWidth: 2,
       borderColor: '#2B5E3D',
+    },
+
+    // Categories section
+    categories: {
+      width: 'auto',
+      height: 'auto',
+      marginTop: 10,
+    },
+    categoriesTitle: {
+      fontSize: 22,
+      fontWeight: '500',
+      color: '#1A482F',
+      marginBottom: 15,
     },
 });
 
