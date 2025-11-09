@@ -42,7 +42,7 @@ const LoginScreen = () => {
                     alert('Please enter a valid email address');
                 } 
                 else {
-                    console.log('Login successful');
+                    navigation.navigate('MainTabs')
                     // Later: connect to backend API
                 }
             }}
