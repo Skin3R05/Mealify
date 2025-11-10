@@ -11,6 +11,7 @@ import { Ionicons } from '@expo/vector-icons';
 import CategoryCard from '../components/CategoryCard.js';
 import React, { useState, useMemo } from 'react'
 import { FlatList } from 'react-native-gesture-handler';
+import RestaurantCard from '../components/RestaurantCard.js';
 
 
 // ===========================
@@ -24,19 +25,43 @@ const CATEGORIES = [
   { id: '4', label: 'Desserts', icon: 'ice-cream', bg: '#F8F0FF', textColor: '#8A41B3', iconColor: '#8A41B3', activeBg: '#8A41B3', activeText: '#fff', activeIconColor: '#fff' },
   { id: '5', label: 'Sushi', icon: 'fish', bg: '#EEF8FF', textColor: '#006B9C', iconColor: '#006B9C', activeBg: '#006B9C', activeText: '#fff', activeIconColor: '#fff' },
 ];
+const RESTAURANTS = [
+  {
+    id: '1',
+    name: 'Pizza Palace',
+    tags: 'Italian, Fast Food',
+    stars: '⭐ 4.8',
+    time: '25 min',
+    image: require('../assets/images/pizza.webp'),
+  },
+  {
+    id: '2',
+    name: 'Burger House',
+    tags: 'American, Burgers',
+    stars: '⭐ 4.6',
+    time: '30 min',
+    image: require('../assets/images/burger.webp'),
+  },
+  {
+    id: '3',
+    name: 'Falafel Bistro',
+    tags: 'Vegan, Mediterranean',
+    stars: '⭐ 4.9',
+    time: '20 min',
+    image: require('../assets/images/falafel.webp'),
+  },
+];
 
 const HomeScreen = () => {
   const [activeCategory, setActiveCategory] = useState ('1');
-
   const onSelectCategory = (id) => {
     setActiveCategory(id);
     // TODO: filter restaurants based on selected category
   }
-
   const renderCategory = ({ item }) => (
     <CategoryCard item = {item} active = {item.id === activeCategory} onPress = {onSelectCategory} />
   )
-
+  
   return (
     <View style = {styles.container}>
   
@@ -62,6 +87,24 @@ const HomeScreen = () => {
         snapToAlignment="start"
         decelerationRate="fast"
       />
+
+      <View style = {styles.categories}>
+        <Text style = {styles.categoriesTitle}>Restaurants</Text>
+      </View>
+      <FlatList
+        data = {RESTAURANTS}
+        keyExtractor={(item) => item.id}
+        renderItem = {({ item }) => (
+          <RestaurantCard item = {item} onPress = {(id) => console.log('Selected', id)} />
+        )}
+        vertical
+        showsVerticalScrollIndicator={false}
+        snapToAlignment="start"
+        decelerationRate="fast"
+      />
+
+
+
     </View>
   )
 };
@@ -75,7 +118,7 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#EFFCF1',
+        backgroundColor: '#E2F9E0',
         paddingHorizontal: 25,
         paddingTop: 80,
     },
