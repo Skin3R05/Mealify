@@ -1,17 +1,20 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
-
+import { useNavigation } from '@react-navigation/native'
 
 // ===========================
 // Main code
 // ===========================
 
 const RestaurantCard = ({ item, onPress }) => {
-  return (
+  
+    const navigation = useNavigation();
+
+    return (
     <TouchableOpacity
         accessibilityRole='button'
         accessibilityLabel={`Restaurant ${item.name}`}
-        onPress={() => onPress(item.id)}
+        onPress={() => navigation.navigate('RestaurantDetailsScreen', { restaurant: item })}
         style = {styles.card}
         activeOpacity={0.9}
     >

@@ -7,6 +7,9 @@ import WelcomeScreen from '../screens/WelcomeScreen.js';
 import LoginScreen from '../screens/LoginScreen.js';
 import SignUpScreen from '../screens/SignUpScreen.js';
 import TabNavigator from './TabNavigator.js';
+import RestaurantDetailsScreen from '../screens/RestaurantDetailsScreen.js';
+// DEL LATER
+import HomeScreen from '../screens/HomeScreen.js';
 
 
 
@@ -31,10 +34,13 @@ export default function AppNavigator() {
           },
         }}
       >
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />        
+
         <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
         <Stack.Screen name="MainTabs" component={TabNavigator} />
+        <Stack.Screen name="RestaurantDetailsScreen" component={RestaurantDetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -12,6 +12,7 @@ import CategoryCard from '../components/CategoryCard.js';
 import React, { useState, useMemo } from 'react'
 import { FlatList } from 'react-native-gesture-handler';
 import RestaurantCard from '../components/RestaurantCard.js';
+import { useNavigation } from '@react-navigation/native';
 
 
 // ===========================
@@ -32,7 +33,7 @@ const RESTAURANTS = [
     tags: 'Italian, Fast Food',
     stars: '⭐ 4.8',
     time: '25 min',
-    image: require('../assets/images/pizza.webp'),
+    image: require('../assets/images/restaurant1.webp'),
   },
   {
     id: '2',
@@ -40,7 +41,7 @@ const RESTAURANTS = [
     tags: 'American, Burgers',
     stars: '⭐ 4.6',
     time: '30 min',
-    image: require('../assets/images/burger.webp'),
+    image: require('../assets/images/restaurant3.webp'),
   },
   {
     id: '3',
@@ -48,7 +49,7 @@ const RESTAURANTS = [
     tags: 'Vegan, Mediterranean',
     stars: '⭐ 4.9',
     time: '20 min',
-    image: require('../assets/images/falafel.webp'),
+    image: require('../assets/images/restaurant2.webp'),
   },
 ];
 
@@ -95,7 +96,7 @@ const HomeScreen = () => {
         data = {RESTAURANTS}
         keyExtractor={(item) => item.id}
         renderItem = {({ item }) => (
-          <RestaurantCard item = {item} onPress = {(id) => console.log('Selected', id)} />
+          <RestaurantCard item = {item}/>
         )}
         vertical
         showsVerticalScrollIndicator={false}
