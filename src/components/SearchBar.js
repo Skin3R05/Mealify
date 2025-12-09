@@ -6,7 +6,7 @@ import React from 'react'
 // Main code
 // ===========================
 
-const SearchBar = ({ placeholder }) => {
+const SearchBar = ({ placeholder, value, onChangeText }) => {
   return (
     <View style = {styles.searchBar}>
         <Ionicons name="search" size = {20} color="#888" style = {{ marginRight: 8 }} />
@@ -14,6 +14,8 @@ const SearchBar = ({ placeholder }) => {
         placeholder = {placeholder}
         placeholderTextColor= '#888'
         style = {styles.searchInput}
+        value = {value}
+        onChangeText = {onChangeText}
         />
     </View>
   )

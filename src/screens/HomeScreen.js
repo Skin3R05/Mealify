@@ -3,16 +3,12 @@ import {
   Text, 
   StyleSheet, 
   Image,
-  TextInput,
-  SafeAreaView,
 } from 'react-native'
 import SearchBar from '../components/SearchBar.js';
-import { Ionicons } from '@expo/vector-icons';
 import CategoryCard from '../components/CategoryCard.js';
-import React, { useState, useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { FlatList } from 'react-native-gesture-handler';
 import RestaurantCard from '../components/RestaurantCard.js';
-import { useNavigation } from '@react-navigation/native';
 
 
 // ===========================
@@ -62,7 +58,17 @@ const HomeScreen = () => {
   const renderCategory = ({ item }) => (
     <CategoryCard item = {item} active = {item.id === activeCategory} onPress = {onSelectCategory} />
   )
-  
+  const [query, setQuery] = useState(''); // for Search Bar
+  const filteredRestaurants = useMemo(() => {
+    const lowerQuery = query.toLowerCase();
+
+    return RESTAURANTS.filter((restaurant) => {
+      const nameMatch = restaurant.name.toLowerCase().includes(lowerQuery);
+      const tagsMatch = restaurant.tags.toLowerCase().includes(lowerQuery);
+      return nameMatch || tagsMatch;
+    });
+  }, [query]);
+
   return (
     <View style = {styles.container}>
   
@@ -73,7 +79,9 @@ const HomeScreen = () => {
         </View>
         <Image source={require('../assets/images/avatar.jpg')} style = {styles.avatar}></Image>        
       </View>
-      <SearchBar placeholder = {'Search'} />
+
+      {/* Search Bar */}
+      <SearchBar placeholder = {'Search'} onChangeText={setQuery} value={query} />
 
       <View style = {styles.categories}>
         <Text style = {styles.categoriesTitle}>Categories</Text>
@@ -93,7 +101,7 @@ const HomeScreen = () => {
         <Text style = {styles.categoriesTitle}>Restaurants</Text>
       </View>
       <FlatList
-        data = {RESTAURANTS}
+        data = {filteredRestaurants}
         keyExtractor={(item) => item.id}
         renderItem = {({ item }) => (
           <RestaurantCard item = {item}/>
