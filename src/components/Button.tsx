@@ -7,7 +7,13 @@ import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 // Main code
 // ===========================
 
-const Button = ({ title, onPress, style }) => {
+type ButtonProps = {
+    title: string;
+    onPress?: () => void;
+    style?: any
+}
+
+const Button: React.FC<ButtonProps> = ({ title, onPress, style }) => {
   return (
         <TouchableOpacity style = {styles.button} onPress = {onPress}>
             <Text style = {styles.text}>{title}</Text>

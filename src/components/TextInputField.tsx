@@ -7,7 +7,14 @@ import React from 'react'
 // Main code
 // ===========================
 
-const TextInputField = ({ placeholder, secureTextEntry, value, onChangeText }) => {
+type TextInputFieldProps = {
+    placeholder?: string;
+    secureTextEntry?: boolean;
+    value: string;
+    onChangeText: (text: string) => void
+}
+
+const TextInputField: React.FC<TextInputFieldProps> = ({ placeholder, secureTextEntry, value, onChangeText }) => {
   return (
 
         <TextInput

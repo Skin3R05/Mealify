@@ -1,14 +1,28 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image, ViewStyle } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
+
+type RestaurantItem = {
+  id: string;
+  name: string;
+  tags: string;
+  stars: string;
+  time: string;
+  image: any;
+};
+
+type RestaurantCardProps = {
+    item: RestaurantItem;
+}
 
 // ===========================
 // Main code
 // ===========================
 
-const RestaurantCard = ({ item, onPress }) => {
+
+const RestaurantCard: React.FC<RestaurantCardProps> = ({ item}) => {
   
-    const navigation = useNavigation();
+    const navigation = useNavigation<any>();
 
     return (
     <TouchableOpacity
@@ -47,7 +61,7 @@ const styles = StyleSheet.create ({
         paddingVertical: 14,
         marginBottom: 10,
         shadowColor: '#000',
-        shadowOpacity: '0.08',
+        shadowOpacity: 0.08,
         shadowRadius: 6,
         elevation: 3,
     },

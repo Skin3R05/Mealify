@@ -4,25 +4,46 @@ import {
   StyleSheet, 
   Image,
 } from 'react-native'
-import SearchBar from '../components/SearchBar.js';
-import CategoryCard from '../components/CategoryCard.js';
+import SearchBar from '../components/SearchBar';
+import CategoryCard from '../components/CategoryCard';
 import React, { useMemo, useState } from 'react'
 import { FlatList } from 'react-native-gesture-handler';
-import RestaurantCard from '../components/RestaurantCard.js';
+import RestaurantCard from '../components/RestaurantCard';
+
+type Category = {
+  id: string;
+  label: string;
+  icon: string;
+  bg: string;
+  textColor: string;
+  iconColor: string;
+  activeBg: string;
+  activeText: string;
+  activeIconColor: string;
+};
+
+type Restaurant = {
+  id: string;
+  name: string;
+  tags: string;
+  stars: string;
+  time: string;
+  image: any;
+};
 
 
 // ===========================
 // Main code
 // ===========================
 
-const CATEGORIES = [
+const CATEGORIES: Category[] = [
   { id: '1', label: 'Pizza', icon: 'pizza', bg: '#FFF6F6', textColor: '#B1392A', iconColor: '#B1392A', activeBg: '#B1392A', activeText: '#fff', activeIconColor: '#fff' },
   { id: '2', label: 'Burgers', icon: 'fast-food', bg: '#FFF8E6', textColor: '#B36B00', iconColor: '#B36B00', activeBg: '#B36B00', activeText: '#fff', activeIconColor: '#fff' },
   { id: '3', label: 'Vegan', icon: 'leaf', bg: '#EFFCF1', textColor: '#1A7A3A', iconColor: '#1A7A3A', activeBg: '#1A7A3A', activeText: '#fff', activeIconColor: '#fff' },
   { id: '4', label: 'Desserts', icon: 'ice-cream', bg: '#F8F0FF', textColor: '#8A41B3', iconColor: '#8A41B3', activeBg: '#8A41B3', activeText: '#fff', activeIconColor: '#fff' },
   { id: '5', label: 'Sushi', icon: 'fish', bg: '#EEF8FF', textColor: '#006B9C', iconColor: '#006B9C', activeBg: '#006B9C', activeText: '#fff', activeIconColor: '#fff' },
 ];
-const RESTAURANTS = [
+const RESTAURANTS: Restaurant[] = [
   {
     id: '1',
     name: 'Pizza Palace',
@@ -50,15 +71,14 @@ const RESTAURANTS = [
 ];
 
 const HomeScreen = () => {
-  const [activeCategory, setActiveCategory] = useState ('1');
-  const onSelectCategory = (id) => {
+  const [activeCategory, setActiveCategory] = useState<string> ('1');
+  const onSelectCategory = (id: string) => {
     setActiveCategory(id);
-    // TODO: filter restaurants based on selected category
   }
-  const renderCategory = ({ item }) => (
+  const renderCategory = ({ item }: { item: Category }) => (
     <CategoryCard item = {item} active = {item.id === activeCategory} onPress = {onSelectCategory} />
   )
-  const [query, setQuery] = useState(''); // for Search Bar
+  const [query, setQuery] = useState<string>(''); // for Search Bar
   const filteredRestaurants = useMemo(() => {
     const lowerQuery = query.toLowerCase();
 
@@ -92,7 +112,6 @@ const HomeScreen = () => {
         renderItem = {renderCategory}
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.categoriesList}
         snapToAlignment="start"
         decelerationRate="fast"
       />
@@ -106,7 +125,6 @@ const HomeScreen = () => {
         renderItem = {({ item }) => (
           <RestaurantCard item = {item}/>
         )}
-        vertical
         showsVerticalScrollIndicator={false}
         snapToAlignment="start"
         decelerationRate="fast"

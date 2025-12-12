@@ -6,7 +6,13 @@ import React from 'react'
 // Main code
 // ===========================
 
-const SearchBar = ({ placeholder, value, onChangeText }) => {
+type SearchBarProps = {
+  placeholder?: string;
+  value: string;
+  onChangeText: (text: string) => void;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ placeholder, value, onChangeText }) => {
   return (
     <View style = {styles.searchBar}>
         <Ionicons name="search" size = {20} color="#888" style = {{ marginRight: 8 }} />

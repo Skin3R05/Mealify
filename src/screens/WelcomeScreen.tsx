@@ -1,16 +1,27 @@
 import { View, Text, StatusBar, Image, StyleSheet } from 'react-native'
-import Button from '../components/Button.js'
+import Button from '../components/Button'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
+type RootStackParamList = {
+  WelcomeScreen: undefined;
+  LoginScreen: undefined;
+  SignUpScreen: undefined;
+  MainTabs: undefined;
+};
 
+type WelcomeScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'WelcomeScreen'
+>;
 
 // ===========================
 // Main code
 // ===========================
 
 const WelcomeScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<WelcomeScreenNavigationProp>();
 
   return (
     <View style = {styles.container}>

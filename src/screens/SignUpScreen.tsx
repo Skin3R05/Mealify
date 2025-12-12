@@ -1,10 +1,22 @@
 import { StatusBar, View, Text, Image, StyleSheet, TextInput, TouchableOpacity} from 'react-native'
-import Button from '../components/Button.js'
-import TextInputField from '../components/TextInputField.js'
+import Button from '../components/Button'
+import TextInputField from '../components/TextInputField'
 import { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { Alert } from 'react-native'
 import React from 'react'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+type RootStackParamList = {
+  SignUpScreen: undefined;
+  LoginScreen: undefined;
+  MainTabs: undefined;
+};
+
+type SignUpScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'SignUpScreen'
+>;
 
 
 // ===========================
@@ -13,11 +25,11 @@ import React from 'react'
 
 
 const SignUpScreen = () => {
-    const [name, setName] = useState ('');
-    const [email, setEmail] = useState('');  
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const navigation = useNavigation();
+    const [name, setName] = useState<string> ('');
+    const [email, setEmail] = useState<string>('');  
+    const [password, setPassword] = useState<string>('');
+    const [confirmPassword, setConfirmPassword] = useState<string>('');
+    const navigation = useNavigation<SignUpScreenNavigationProp>();
 
   return (
     <View style = {styles.container}>

@@ -7,10 +7,23 @@ import {
   TouchableOpacity,
   FlatList,
   ScrollView,
+  ListRenderItem,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 
+type RestaurantDetailsParamList = {
+  RestaurantDetailsScreen: {
+    restaurant: {
+      id: string;
+      name: string;
+      tags: string;
+      stars: string;
+      time: string;
+      image: any;
+    };
+  };
+};
 
 const MENU_ITEMS = [
   {
@@ -38,10 +51,10 @@ const MENU_ITEMS = [
 
 const RestaurantDetailsScreen = () => {
   const navigation = useNavigation();
-  const route = useRoute();
+  const route = useRoute<RouteProp<RestaurantDetailsParamList, 'RestaurantDetailsScreen'>>();
   const { restaurant } = route.params;
 
-  const renderMenuItem = ({ item }) => (
+  const renderMenuItem: ListRenderItem<typeof MENU_ITEMS[0]> = ({ item }) => (
     <View style={styles.menuCard}>
       <Image source={item.image} style={styles.menuImage} />
       <View style={styles.menuInfo}>

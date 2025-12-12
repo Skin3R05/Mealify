@@ -1,17 +1,28 @@
 import { StatusBar, View, Text, Image, StyleSheet, TextInput, TouchableOpacity} from 'react-native'
-import Button from '../components/Button.js';
-import TextInputField from '../components/TextInputField.js';
+import Button from '../components/Button';
+import TextInputField from '../components/TextInputField';
 import { useNavigation } from '@react-navigation/native'
 import { useState } from 'react'
 import React from 'react'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
+type RootStackParamList = {
+  LoginScreen: undefined;
+  SignUpScreen: undefined;
+  MainTabs: undefined;
+};
+
+type LoginScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'LoginScreen'
+>;
 
 // ===========================
 // Main code
 // ===========================
 
 const LoginScreen = () => {
-  const navigation = useNavigation();    
+  const navigation = useNavigation<LoginScreenNavigationProp>();    
   const [email, setEmail] = useState('');  
   const [password, setPassword] = useState('');
 

@@ -2,12 +2,30 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import React from 'react'
 
+type CategoryItem = {
+  id: string;
+  label: string;
+  icon: string;
+  bg?: string;
+  textColor?: string;
+  iconColor?: string;
+  activeBg?: string;
+  activeText?: string;
+  activeIconColor?: string;
+};
+
+type CategoryCardProps = {
+    item: CategoryItem;
+    active: boolean;
+    onPress: (id: string) => void
+}
 
 // ===========================
 // Main code
 // ===========================
 
-const CategoryCard = ({ item, active, onPress }) => {
+
+const CategoryCard: React.FC<CategoryCardProps> = ({ item, active, onPress }) => {
     const containerStyle = [
         styles.card,
         { backgroundColor: active ? item.activeBg || '#2B5E3D' : item.bg || '#FFF'},
@@ -28,7 +46,7 @@ const CategoryCard = ({ item, active, onPress }) => {
         activeOpacity={0.85}
     >
         <View style = {styles.iconWrapper}>
-            <Ionicons name = {item.icon} size = {30} color = {iconColor} />
+            <Ionicons name = {item.icon as any} size = {30} color = {iconColor} />
         </View>
         <Text style = {textStyle} numberOfLines={1}>
             {item.label}
